@@ -4,6 +4,7 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const ol = document.querySelector('ol');
 let ul = document.querySelector('ul');
+let resetgame = document.getElementById('resetgame');
 const hearts = ol.children;
 let missed = 0;
 const phrases = ['Anthony Davis', 'Lebron James', 'Chris Paul', 'Kawhi Leonard', 
@@ -68,19 +69,15 @@ function checkWinner() {
     console.log(showing.length);
     console.log(lettersclass.length);
     if(showing.length == lettersclass.length) {
-        let resetgame = document.getElementById('resetgame');
         resetgame.style.display = 'block';
         overlay.className = 'win';
         overlay.style.display = '';
-        document.querySelector('h2').textContent = 'Congratulations! You Won!' 
-        reset(); 
+        document.querySelector('h2').textContent = 'Congratulations! You Won!'  
     }   else if(missed >= 5) {
-            let resetgame = document.getElementById('resetgame');
             resetgame.style.display = 'block';
             overlay.className = 'lose';
             overlay.style.display = '';
             document.querySelector('h2').textContent = 'You lost this round. Refresh to try again!';
-            reset(); 
     }
 }
 
@@ -124,7 +121,9 @@ function reset() {
 }
 
 
-
+resetgame.addEventListener('click', () => {
+    reset();
+})
 
 
 
