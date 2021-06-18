@@ -1,4 +1,4 @@
-const btn_reset = document.querySelector('.btn_reset');
+const btn_reset = document.querySelector('.btn__reset');
 const overlay = document.querySelector('#overlay');
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
@@ -54,25 +54,42 @@ function checkLetter(l) {
         return null;
     }
 }
-
+//Checks to see if the player has won the game or lost. Screen is displayed accordingly//
 function checkWinner() {
     const showing = document.getElementsByClassName('show');
     const lettersclass = document.getElementsByClassName('letter');
     console.log(showing.length);
     console.log(lettersclass.length);
     if(showing.length == lettersclass.length) {
+        let resetgame = document.getElementById('resetgame');
+        resetgame.style.display = 'block';
         overlay.className = 'win';
         overlay.style.display = '';
         document.querySelector('h2').textContent = 'Congratulations! You Won!'
+        let show = ul.children;
+        for(var i=0; i<show.length; i++) {
+            show[i].remove();
+        }
+        console.log(show);
+        console.log(show.length);
+    
     }   else if(missed >= 5) {
+            let resetgame = document.getElementById('resetgame');
+            resetgame.style.display = 'block';
             overlay.className = 'lose';
             overlay.style.display = '';
-            document.querySelector('h2').textContent = 'You lost this round. Refresh to try again!'
+            document.querySelector('h2').textContent = 'You lost this round. Refresh to try again!';
+            let show = ul.children;
+            for(var i=0; i<show.length; i++) {
+                show[i].remove();
+            }
+            console.log(show);
+            console.log(show.length);
     }
 }
 
 
-
+//when a letter is clicked it changes call to 'chosen' the style makes the button darker blue//
 qwerty.addEventListener('click', (e) => {
     let clickedletter = e.target;
     let clickedlettervalue = clickedletter.textContent;
@@ -86,7 +103,14 @@ qwerty.addEventListener('click', (e) => {
         hearts[0].remove();
     }
     checkWinner();
+
     
+});
+
+resetgame.addEventListener('click', () => {
+    addPhraseToDisplay(getRandomPhraseArray(phrases));
+    missed = 0;
+    console.log(missed);
 });
 
 

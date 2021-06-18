@@ -95,6 +95,7 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
+  transition: 3s ease-in-out;
 }
 
 /* Keyboard */
@@ -111,6 +112,9 @@ button {
   color: #FFFFFF;
 }
 
+#resetgame {
+  display: none;
+}
 .btn__reset {
   padding: 8px;
   margin: 50px auto;
