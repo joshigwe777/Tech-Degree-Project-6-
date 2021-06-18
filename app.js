@@ -3,6 +3,7 @@ const overlay = document.querySelector('#overlay');
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const ol = document.querySelector('ol');
+let ul = document.querySelector('ul');
 const hearts = ol.children;
 let missed = 0;
 const phrases = ['Anthony Davis', 'Lebron James', 'Chris Paul', 'Kawhi Leonard', 
@@ -11,12 +12,15 @@ const phrases = ['Anthony Davis', 'Lebron James', 'Chris Paul', 'Kawhi Leonard',
 overlay.addEventListener('click', (e) => {
     overlay.style.display = 'none';
 });
-    function getRandomPhraseArray(arr) {
+    
+//Generates a random phrase from the given list of phrases//
+function getRandomPhraseArray(arr) {
     let num = Math.floor(Math.random()*arr.length);
     let result = phrases[num].split('');
     return result;
 }
-let ul = document.querySelector('ul');
+
+//Adds random phrase to the display with letters hidden
 function addPhraseToDisplay(arr){
     for(var i=0; i<arr.length; i++){
         let li = document.createElement('li');
@@ -32,12 +36,15 @@ function addPhraseToDisplay(arr){
     return ul;
 }
 
+//Calling add Phrase to display function to generate screen display//
 addPhraseToDisplay(getRandomPhraseArray(phrases));
+
 let phrasearray = [' '];
 for(var i=0; i<ul.children.length; i++) {
     phrasearray.push(ul.children[i].textContent.toLocaleLowerCase());
 }
 
+//checks to see if passed letter matches with a letter on the screen. If so letter is shown//
 function checkLetter(l) {    
     const letters = document.getElementsByClassName('letter');
     if(phrasearray.includes(l)) {
