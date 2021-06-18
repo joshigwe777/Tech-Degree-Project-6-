@@ -16,7 +16,7 @@ overlay.addEventListener('click', (e) => {
     let result = phrases[num].split('');
     return result;
 }
-let ul = document.querySelector('#phrase ul');
+let ul = document.querySelector('ul');
 function addPhraseToDisplay(arr){
     for(var i=0; i<arr.length; i++){
         let li = document.createElement('li');
@@ -65,26 +65,15 @@ function checkWinner() {
         resetgame.style.display = 'block';
         overlay.className = 'win';
         overlay.style.display = '';
-        document.querySelector('h2').textContent = 'Congratulations! You Won!'
-        let show = ul.children;
-        for(var i=0; i<show.length; i++) {
-            show[i].remove();
-        }
-        console.log(show);
-        console.log(show.length);
-    
+        document.querySelector('h2').textContent = 'Congratulations! You Won!' 
+        reset(); 
     }   else if(missed >= 5) {
             let resetgame = document.getElementById('resetgame');
             resetgame.style.display = 'block';
             overlay.className = 'lose';
             overlay.style.display = '';
             document.querySelector('h2').textContent = 'You lost this round. Refresh to try again!';
-            let show = ul.children;
-            for(var i=0; i<show.length; i++) {
-                show[i].remove();
-            }
-            console.log(show);
-            console.log(show.length);
+            reset(); 
     }
 }
 
@@ -100,18 +89,33 @@ qwerty.addEventListener('click', (e) => {
 
     if(letterFound === null) {
         missed+=1;
-        hearts[0].remove();
+        hearts[missed-1].firstChild.setAttribute('src', 'images/lostHeart.png');
     }
     checkWinner();
-
-    
 });
 
-resetgame.addEventListener('click', () => {
-    addPhraseToDisplay(getRandomPhraseArray(phrases));
-    missed = 0;
-    console.log(missed);
-});
+
+
+
+function reset() {
+    let buttons = document.querySelectorAll('.keyrow button');
+    let lis = ul.children;
+    let ols = ol.children;
+    console.log(ols[0]);
+    for(var i=0; i<lis.length; i++) {
+        lis[i].remove();
+    }
+    for(var j=0; j<buttons.length; j++) {
+        buttons[j].className = '';
+        buttons[j].setAttribute('disabled', false);
+    }
+    for(var k=0; k<ols.length; k++) {
+        ols[k].firstChild.setAttribute('src', 'images/LiveHeart.png');
+
+    }
+    addPhraseToDisplay(getRandomPhraseArray(phrases)); 
+}
+
 
 
 
