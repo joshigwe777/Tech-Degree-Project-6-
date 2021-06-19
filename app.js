@@ -69,15 +69,17 @@ function checkWinner() {
     console.log(showing.length);
     console.log(lettersclass.length);
     if(showing.length == lettersclass.length) {
-        resetgame.style.display = 'block';
         overlay.className = 'win';
         overlay.style.display = '';
-        document.querySelector('h2').textContent = 'Congratulations! You Won!'  
+        document.querySelector('h2').textContent = 'Congratulations! You Won!' 
+        btn_reset.textContent = 'Go Again';
+        reset(); 
     }   else if(missed >= 5) {
-            resetgame.style.display = 'block';
             overlay.className = 'lose';
             overlay.style.display = '';
             document.querySelector('h2').textContent = 'You lost this round. Refresh to try again!';
+            btn_reset.textContent = 'Go Again';
+            reset(); 
     }
 }
 
@@ -107,11 +109,11 @@ function reset() {
     let ols = ol.children;
     console.log(ols[0]);
     for(var i=0; i<lis.length; i++) {
-        lis[i].remove();
+        lis[i].style.display = 'none';
     }
     for(var j=0; j<buttons.length; j++) {
         buttons[j].className = '';
-        buttons[j].setAttribute('disabled', false);
+        buttons[j].removeAttribute('disabled');
     }
     for(var k=0; k<ols.length; k++) {
         ols[k].firstChild.setAttribute('src', 'images/LiveHeart.png');
@@ -121,9 +123,9 @@ function reset() {
 }
 
 
-resetgame.addEventListener('click', () => {
-    reset();
-})
+//resetgame.addEventListener('click', () => {
+  //  reset();
+//})
 
 
 
