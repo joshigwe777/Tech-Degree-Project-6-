@@ -40,13 +40,14 @@ function addPhraseToDisplay(arr){
 //Calling add Phrase to display function to generate screen display//
 addPhraseToDisplay(getRandomPhraseArray(phrases));
 
-let phrasearray = [' '];
-for(var i=0; i<ul.children.length; i++) {
-    phrasearray.push(ul.children[i].textContent.toLocaleLowerCase());
-}
+
 
 //checks to see if passed letter matches with a letter on the screen. If so letter is shown//
-function checkLetter(l) {    
+function checkLetter(l) { 
+    let phrasearray = [' '];
+    for(var i=0; i<ul.children.length; i++) {
+    phrasearray.push(ul.children[i].textContent.toLocaleLowerCase());
+    }   
     const letters = document.getElementsByClassName('letter');
     if(phrasearray.includes(l)) {
         for(var i=0; i<ul.children.length; i++){
@@ -109,7 +110,7 @@ function reset() {
     let ols = ol.children;
     console.log(ols[0]);
     for(var i=0; i<lis.length; i++) {
-        lis[i].style.display = 'none';
+        lis[i].classList.remove('show');
         lis[i].remove();
     }
     for(var j=0; j<buttons.length; j++) {
