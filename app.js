@@ -110,6 +110,7 @@ function reset() {
     console.log(ols[0]);
     for(var i=0; i<lis.length; i++) {
         lis[i].style.display = 'none';
+        lis[i].remove();
     }
     for(var j=0; j<buttons.length; j++) {
         buttons[j].className = '';
