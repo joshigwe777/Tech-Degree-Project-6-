@@ -86,19 +86,22 @@ function checkWinner() {
 
 
 //when a letter is clicked it changes call to 'chosen' the style makes the button darker blue//
-qwerty.addEventListener('click', (e) => {
-    let clickedletter = e.target;
-    let clickedlettervalue = clickedletter.textContent;
-    clickedletter.className = 'chosen';
-    clickedletter.setAttribute('disabled', true);
-    
-    let letterFound = checkLetter(clickedlettervalue);
-
-    if(letterFound === null) {
-        missed+=1;
-        hearts[missed-1].firstChild.setAttribute('src', 'images/lostHeart.png');
+qwerty.addEventListener("click", (e) => {
+    let btns = document.querySelectorAll("#qwerty button");
+    for (let i = 0; i < btns.length; i++) {
+        if (e.target === btns[i]) {
+            let clickedletter = e.target;
+            let clickedlettervalue = clickedletter.textContent;
+            clickedletter.className = "chosen";
+            clickedletter.setAttribute("disabled", true);
+            let letterFound = checkLetter(clickedlettervalue);
+            if (letterFound === null) {
+                missed += 1;
+                hearts[missed - 1].firstChild.setAttribute("src", "images/lostHeart.png");
+            }
+            checkWinner();
+        }
     }
-    checkWinner();
 });
 
 
@@ -106,7 +109,8 @@ qwerty.addEventListener('click', (e) => {
 
 function reset() {
     let buttons = document.querySelectorAll('.keyrow button');
-    let lis = ul.children;
+    let lis = document.querySelectorAll('ul li');
+    let spaces = document.querySelectorAll('li.space');
     let ols = ol.children;
     console.log(ols[0]);
     for(var i=0; i<lis.length; i++) {
@@ -119,8 +123,8 @@ function reset() {
     }
     for(var k=0; k<ols.length; k++) {
         ols[k].firstChild.setAttribute('src', 'images/LiveHeart.png');
-
     }
+    missed = 0;
     addPhraseToDisplay(getRandomPhraseArray(phrases)); 
 }
 
